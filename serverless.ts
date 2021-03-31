@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
 
-import { hello } from './src/functions';
+import { create, update, findOne } from './src/functions';
 
 const serverlessConfiguration: AWS = {
   service: 'vehicle-service',
@@ -11,7 +11,7 @@ const serverlessConfiguration: AWS = {
       includeModules: true
     }
   },
-  plugins: ['serverless-webpack'],
+  plugins: ['serverless-webpack', 'serverless-offline'],
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
@@ -24,7 +24,8 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: '20201221',
   },
-  functions: { hello }
+  useDotenv: true,
+  functions: { create, update, findOne }
 }
 
 module.exports = serverlessConfiguration;
